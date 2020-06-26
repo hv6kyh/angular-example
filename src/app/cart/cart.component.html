@@ -1,4 +1,35 @@
+<h3>Cart</h3>
+
+<p>
+  <a [routerLink]="['/shipping']">배송비 확인</a>
+</p>
+
+<div *ngIf="items.length < 1">
+  <h3>물건을 추가해보세요!</h3>
+</div>
+
 <div class="cart-item" *ngFor="let item of items">
   <span>{{ item.name }}</span>
   <span>{{ item.price | currency }}</span>
 </div>
+
+<form [formGroup]="checkoutForm" (ngSubmit)="submit(checkoutForm.value)">
+
+  <div>
+    <!-- 라벨에 for 속성을 주면 id가 같은 입력 필드와 연결됨 -->
+    <!-- 연결된다는 것은 라벨을 누르면 입력 필드에 포커스 감 -->
+    <label for="name">
+      name
+    </label>
+    <input id="name" type="text" formControlName="name">
+  </div>
+
+  <div>
+    <label for="address">
+      address
+    </label>
+    <input id="address" type="text" formControlName="address">
+  </div>
+
+  <button class="button" type="submit">구매하기</button>
+</form>
